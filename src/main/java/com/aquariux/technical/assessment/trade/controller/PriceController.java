@@ -25,4 +25,10 @@ public class PriceController {
     public ResponseEntity<List<BestPriceResponse>> getLatestBestPrices() {
         return ResponseEntity.ok(priceService.getLatestBestPrices());
     }
+
+    @GetMapping("/latestByPairId")
+    @Operation(summary = "Get latest best prices by pair Id", description = "Retrieve the latest aggregated best prices by pair id")
+    public ResponseEntity<BestPriceResponse> getLatestBestPriceByPairId(Long pairId) {
+        return ResponseEntity.ok(priceService.getLatestBestPriceByPairId(pairId));
+    }
 }

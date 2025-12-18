@@ -14,4 +14,16 @@ public class Trade {
     private BigDecimal price;
     private BigDecimal totalAmount;
     private LocalDateTime tradeTime;
+
+    public Trade(Long userId, Long cryptoPairId, String tradeType,
+                 BigDecimal quantity, BigDecimal price,
+                 BigDecimal totalAmount) {
+        this.userId = userId;
+        this.cryptoPairId = cryptoPairId;
+        this.tradeType = tradeType;
+        this.quantity = quantity;
+        this.price = price;
+        this.totalAmount = totalAmount;
+        this.tradeTime = LocalDateTime.now();
+    }
 }

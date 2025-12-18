@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface PriceServiceInterface {
     List<BestPriceResponse> getLatestBestPrices();
+    BestPriceResponse getLatestBestPriceByPairId(Long pairId);
 }

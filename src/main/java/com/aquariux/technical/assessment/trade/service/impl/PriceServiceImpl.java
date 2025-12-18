@@ -24,6 +24,14 @@ public class PriceServiceImpl implements PriceServiceInterface {
                 .toList();
     }
 
+    @Override
+    public BestPriceResponse getLatestBestPriceByPairId(Long pairId) {
+        CryptoPrice latestPrice = cryptoPriceMapper.findLatestPriceByPairId(pairId)
+                .orElseThrow(() -> new RuntimeException("Unable to get latest price by pairId: " + pairId));
+
+        return mapToResponse(latestPrice);
+    }
+
     private BestPriceResponse mapToResponse(CryptoPrice price) {
         BestPriceResponse response = new BestPriceResponse();
         response.setPairName(price.getPairName());
