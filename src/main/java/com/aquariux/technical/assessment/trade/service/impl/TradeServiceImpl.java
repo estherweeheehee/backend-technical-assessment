@@ -104,8 +104,6 @@ public class TradeServiceImpl implements TradeServiceInterface {
         BigDecimal totalSellAmount = quantity.multiply(bidPrice);
         walletService.updateExistingElseCreate(userId, cryptoPair.getQuoteSymbolId(), totalSellAmount);
 
-        // Log the trade
-
     }
 
     private void buyTrade(Long userId, BigDecimal quantity, CryptoPair cryptoPair, BigDecimal askPrice) {
@@ -129,18 +127,15 @@ public class TradeServiceImpl implements TradeServiceInterface {
 
         // if user dont have the new currency's balance, create it
         walletService.updateExistingElseCreate(userId, cryptoPair.getBaseSymbolId(), quantity);
-
-        // Log the trade
-
     }
 
     private CryptoPair verifyAndGetCryptoPair(String targetSymbol) {
         Symbol targetSymbolEntity = symbolMapper.findBySymbol(targetSymbol)
                 .orElseThrow(() -> new RuntimeException("Unable to find target symbol under: " + targetSymbol));
+
         if (!targetSymbolEntity.getActive()) {
             throw new RuntimeException("Target symbol is inactive");
         }
-
         return cryptoPairMapper.findIdByBaseSymbolId(targetSymbolEntity.getId())
                 .orElseThrow(() -> new RuntimeException("Unable to find crypto pair"));
 
