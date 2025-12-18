@@ -36,6 +36,9 @@ public class TradeServiceImpl implements TradeServiceInterface {
     public TradeResponse executeTrade(TradeRequest tradeRequest) {
         // TODO: Implement the core trading engine
         // What should happen when a user executes a trade?
+
+        // assuming user validation done, ensure user exists and is verified
+
         TradeType tradeType = tradeRequest.getTradeType();
         BigDecimal quantity = tradeRequest.getQuantity();
         String targetSymbol = tradeRequest.getTargetSymbol();
@@ -52,12 +55,10 @@ public class TradeServiceImpl implements TradeServiceInterface {
             BigDecimal price;
 
             if (tradeType == TradeType.BUY) {
-                // check if wallet got sufficient USDT
                 price = bestPrice.getAskPrice();
                 buyTrade(userId, quantity, cryptoPair, price);
 
             } else {
-                // check if wallet got sufficient targetSymbol
                 price = bestPrice.getBidPrice();
                 sellTrade(userId, quantity, cryptoPair, price);
             }
